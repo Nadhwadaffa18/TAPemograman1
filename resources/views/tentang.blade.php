@@ -6,9 +6,9 @@
 <section class="about">
     <div class="about-container">
         <div class="about-text">
-            <h1>Tentang Saya</h1>
+            <h1>Tentang </h1>
             <p>
-                Saya <strong>Daffa</strong>, seorang fotografer yang berfokus pada
+                seorang fotografer yang berfokus pada
                 fotografi potret, event, dan dokumentasi kreatif.
                 Fotografi bagi saya bukan hanya gambar,
                 tetapi cerita yang diabadikan dalam satu frame.
@@ -24,5 +24,5 @@
         </div>
 
         <div class="about-image">
-            <img src="{{ asset('images/profile.jpg') }}" alt="Foto Daffa">
+            <img src="{{ asset('images/profile.jpg') }}" alt="Foto ">
         </div>

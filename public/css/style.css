@@ -512,3 +512,38 @@ footer {
         padding: 40px;
     }
 }
+
+/* Additional UI refinements */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.menu {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+@media (max-width: 700px) {
+    .nav-wrap { padding: 14px; }
+    .menu { display: none; }
+    .brand { font-size: 18px; }
+}
+
+.btn-sm {
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-transform: none;
+    font-size: 14px;
+}
+
+.flash-success { background:#e6f6ea; border:1px solid #cfe9d6; padding:12px 18px; border-radius:8px; margin-bottom:18px; color:#226622 }
+
+.portfolio-item { background:#fff }
+.portfolio-item img { transition: transform 0.6s cubic-bezier(.2,.9,.2,1) }
+
+.pagination { display:flex; gap:8px; list-style:none; padding:0 }
+.pagination li a { display:inline-block; padding:8px 12px; background:#fff; border-radius:8px; border:1px solid #eee; color:#444 }
+.pagination li.active span { background:#c5a47e; color:#fff; border-color:#c5a47e }

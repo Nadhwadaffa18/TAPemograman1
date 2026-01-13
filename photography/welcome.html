@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudioFoto Pro - Welcome</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .welcome-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        .welcome-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 50%, #1a1a1a 100%);
+            color: #d4af37;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .welcome-header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .welcome-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .welcome-header .status {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        .welcome-content {
+            padding: 50px 40px;
+        }
+        
+        .welcome-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #d4af37;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .quick-link {
+            background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+            border-left: 4px solid #d4af37;
+            padding: 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .quick-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            border-left-color: #1a1a1a;
+        }
+        
+        .quick-link i {
+            font-size: 2em;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        
+        .quick-link h3 {
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        
+        .quick-link p {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: #d4af37;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            border: 2px solid #d4af37;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(135deg, #d4af37 0%, #c79c2f 100%);
+            color: #1a1a1a;
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #1a1a1a;
+            border: 2px solid #1a1a1a;
+        }
+        
+        .btn-secondary:hover {
+            background: #1a1a1a;
+            color: #d4af37;
+        }
+        
+        .welcome-footer {
+            background: #f5f5f5;
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .welcome-footer p {
+            margin-bottom: 10px;
+            color: #666;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .feature-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .feature-item i {
+            color: #d4af37;
+            margin-right: 5px;
+        }
+        
+        .alert {
+            background: #fffbe6;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: #856404;
+        }
+        
+        .alert i {
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .welcome-header h1 {
+                font-size: 2em;
+            }
+            
+            .welcome-content {
+                padding: 30px 20px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="welcome-container">
+    <div class="welcome-header">
+        <h1>📷 StudioFoto Pro</h1>
+        <p>Website Jasa Fotografi Profesional & Modern</p>
+        <p style="font-size: 0.95em; margin-top: 20px;">Sistem Informasi Lengkap untuk Bisnis Photography</p>
+        <div class="status"><i class="fas fa-check-circle"></i> PROJECT COMPLETE & READY</div>
+    </div>
+    
+    <div class="welcome-content">
+        <!-- Quick Links Section -->
+        <div class="welcome-section">
+            <h2 class="section-title"><i class="fas fa-bolt"></i> Akses Cepat</h2>
+            <div class="quick-links">
+                <a href="index.php" class="quick-link">
+                    <i class="fas fa-home"></i>
+                    <h3>Website</h3>
+                    <p>Lihat website publik</p>
+                </a>
+                <a href="admin/login.php" class="quick-link">
+                    <i class="fas fa-lock"></i>
+                    <h3>Admin Panel</h3>
+                    <p>Login & kelola content</p>
+                </a>
+                <a href="README.md" class="quick-link">
+                    <i class="fas fa-book"></i>
+                    <h3>Dokumentasi</h3>
+                    <p>Baca panduan lengkap</p>
+                </a>
+                <a href="INSTALL.md" class="quick-link">
+                    <i class="fas fa-wrench"></i>
+                    <h3>Setup Guide</h3>
+                    <p>Panduan instalasi</p>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Installation Alert -->
+        <div class="alert">
+            <i class="fas fa-info-circle"></i>
+            <strong>LANGKAH PERTAMA:</strong> Pastikan Anda sudah melakukan setup database sesuai INSTALL.md
+        </div>
+        
+        <!-- Project Info -->
+        <div class="welcome-section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Informasi Proyek</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-file"></i> 25+ Files
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-code"></i> 3000+ Lines
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-database"></i> 6 Tables
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-star"></i> 50+ Features
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt"></i> Responsive
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i> Secure
+                </div>
+            </div>
+        </div>
+        
+        <!-- Getting Started -->
+        <div class="welcome-section">
+            <h2 class="section-title"><i class="fas fa-play"></i> Mulai Sekarang</h2>
+            <ol style="line-height: 2; color: #666;">
+                <li><strong>Baca INSTALL.md</strong> - Panduan lengkap instalasi</li>
+                <li><strong>Setup Database</strong> - Import setup.sql ke phpMyAdmin</li>
+                <li><strong>Update Konfigurasi</strong> - Edit includes/config.php dengan DB credentials</li>
+                <li><strong>Login Admin</strong> - Akses admin dengan admin/admin123</li>
+                <li><strong>Customize Content</strong> - Tambahkan portfolio & paket Anda</li>
+                <li><strong>Launch Website</strong> - Website siap untuk publik</li>
+            </ol>
+        </div>
+        
+        <!-- Features Overview -->
+        <div class="welcome-section">
+            <h2 class="section-title"><i class="fas fa-sparkles"></i> Fitur Utama</h2>
+            <div style="columns: 2; gap: 30px;">
+                <ul style="list-style: none; color: #666; line-height: 2;">
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Homepage dengan Hero Section</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>About & Team Page</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Portfolio Gallery</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Pricing Packages</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Booking System</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Contact Form</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Admin Dashboard</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Full CRUD Operations</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Responsive Design</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Security Best Practices</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Professional Styling</li>
+                    <li><i class="fas fa-check" style="color: #4caf50; margin-right: 10px;"></i>Complete Documentation</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="buttons">
+            <a href="admin/login.php" class="btn">
+                <i class="fas fa-sign-in-alt"></i> Login Admin (admin/admin123)
+            </a>
+            <a href="index.php" class="btn btn-secondary">
+                <i class="fas fa-globe"></i> View Website
+            </a>
+            <a href="README.md" class="btn btn-secondary">
+                <i class="fas fa-book-open"></i> Full Documentation
+            </a>
+        </div>
+    </div>
+    
+    <div class="welcome-footer">
+        <p><strong>Default Admin Credentials:</strong> admin / admin123</p>
+        <p style="font-size: 0.9em; color: #999;">⚠️ Ubah password admin setelah login pertama untuk keamanan</p>
+        
+        <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; color: #999;">
+            <i class="fas fa-heart" style="color: #d4af37;"></i> Built with care for your photography business<br>
+            <strong>StudioFoto Pro © 2024</strong> | Version 1.0 | Production Ready
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

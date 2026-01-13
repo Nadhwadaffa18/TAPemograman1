@@ -1,0 +1,599 @@
+<!-- FILE STRUCTURE GUIDE -->
+<!-- 
+STUDIOOTO PRO - PHOTOGRAPHY WEBSITE
+======================================
+
+STRUKTUR FILE & DESKRIPSI LENGKAP
+
+1. PUBLIC PAGES (Frontend)
+   └── index.php (Halaman beranda dengan hero section)
+   └── about.php (Tentang studio, tim, pengalaman)
+   └── portfolio.php (Galeri foto dengan filter kategori)
+   └── packages.php (Daftar paket fotografi)
+   └── booking.php (Form pemesanan layanan)
+   └── contact.php (Form kontak & informasi)
+
+2. ADMIN PANEL (/admin)
+   └── login.php (Login page - default: admin/admin123)
+   └── dashboard.php (Dashboard dengan statistik)
+   └── portfolio-crud.php (Kelola portofolio: add/edit/delete)
+   └── packages-crud.php (Kelola paket: add/edit/delete)
+   └── bookings.php (Lihat & ubah status pemesanan)
+   └── messages.php (Lihat pesan kontak dari pengunjung)
+   └── logout.php (Logout)
+
+3. INCLUDES (/includes)
+   └── config.php (Database connection & helper functions)
+   └── header.php (Navbar template)
+   └── footer.php (Footer template)
+   └── get-portfolio.php (JSON API untuk portfolio detail)
+
+4. STYLING (/css)
+   └── style.css (Frontend styling - responsive design)
+   └── admin.css (Admin panel styling)
+
+5. SCRIPTS (/js)
+   └── script.js (JavaScript untuk frontend & admin interactivity)
+
+6. DATABASE (/database)
+   └── setup.sql (Database schema & sample data)
+   
+7. ASSETS (/assets)
+   └── images/ (Folder untuk menyimpan foto portofolio)
+
+8. DOCUMENTATION
+   └── README.md (Panduan lengkap instalasi & penggunaan)
+   └── index.html (File ini - struktur folder guide)
+
+======================================
+QUICK START GUIDE
+======================================
+
+INSTALASI:
+1. Copy folder ke D:\xampp\htdocs\photography
+2. Import database/setup.sql ke phpMyAdmin
+3. Update database credentials di includes/config.php
+4. Akses: http://localhost/photography/
+5. Admin: http://localhost/photography/admin/login.php
+
+DEFAULT LOGIN:
+- Username: admin
+- Password: admin123
+
+FEATURES:
+✓ Responsive design (mobile, tablet, desktop)
+✓ Modern UI dengan warna elegan (hitam, putih, emas)
+✓ Full admin panel dengan CRUD
+✓ Database MySQL dengan 6 tabel
+✓ Form validation & error handling
+✓ Session-based authentication
+✓ Modal & AJAX interactions
+✓ Font Awesome icons
+
+DATABASE TABLES:
+1. admin - User admin dengan authentication
+2. kategori - Kategori foto portofolio
+3. portofolio - Koleksi foto dengan kategori
+4. paket - Paket layanan fotografi
+5. pemesanan - Data pemesanan dari klien
+6. kontak - Pesan kontak dari pengunjung
+
+STYLING COLORS:
+- Primary: #1a1a1a (Dark Black)
+- Accent: #d4af37 (Gold)
+- Light: #f5f5f5 (Light Gray)
+
+RESPONSIVE BREAKPOINTS:
+- Desktop: >= 1024px
+- Tablet: 768px - 1023px
+- Mobile: < 768px
+
+ADMIN FEATURES:
+✓ Dashboard dengan statistik
+✓ Portfolio management (CRUD)
+✓ Package management (CRUD)
+✓ Booking management (filter & status update)
+✓ Message management (view & mark read)
+✓ Date & month filtering
+✓ Modal for details viewing
+
+SECURITY:
+✓ Input escaping untuk SQL injection prevention
+✓ Password hashing dengan PHP password_verify()
+✓ Session-based authentication
+✓ SQL prepared statements ready
+
+HELPER FUNCTIONS (config.php):
+- escape($str) - Sanitize input
+- query($sql) - SELECT multiple rows
+- querySingle($sql) - SELECT single row
+- execute($sql) - INSERT/UPDATE/DELETE
+- formatRupiah($number) - Format currency
+- formatTanggal($date) - Format date Indonesia
+
+API ENDPOINTS:
+- includes/get-portfolio.php?id=X - Get portfolio detail as JSON
+
+IMPORTANT NOTES:
+⚠ Update admin password setelah instalasi
+⚠ Jangan commit database credentials
+⚠ Pastikan folder assets/images/ writable
+⚠ Enable mod_rewrite di Apache jika perlu
+
+FILE SIZES (APPROXIMATE):
+- style.css: ~800 lines
+- admin.css: ~400 lines
+- script.js: ~300 lines
+- portfolio-crud.php: ~200 lines
+- packages-crud.php: ~180 lines
+- bookings.php: ~250 lines
+- messages.php: ~240 lines
+- config.php: ~100 lines
+
+TOTAL FILES: 20+
+TOTAL LINES OF CODE: ~3000+
+FEATURES: 50+
+
+This is a complete, production-ready photography website!
+Enjoy building your photography business! 📷✨
+-->
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudioFoto Pro - Project Structure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
+        }
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #d4af37 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #d4af37;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #d4af37;
+            padding-bottom: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+            border-left: 4px solid #d4af37;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+        .card h3 {
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card p {
+            color: #666;
+            font-size: 0.95em;
+        }
+        .feature-list {
+            list-style: none;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list li:before {
+            content: "✓ ";
+            color: #d4af37;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .code-box {
+            background: #1a1a1a;
+            color: #d4af37;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: #d4af37;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid #d4af37;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #d4af37 0%, #c79c2f 100%);
+            color: #1a1a1a;
+            transform: scale(1.05);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37 0%, #c79c2f 100%);
+            color: #1a1a1a;
+            border: 2px solid #d4af37;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: #d4af37;
+        }
+        footer {
+            background: #1a1a1a;
+            color: #d4af37;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .stat-item {
+            background: linear-gradient(135deg, #d4af37 0%, #c79c2f 100%);
+            color: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .stat-item .number {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        .stat-item .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .warning {
+            background: #ffe8e8;
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #d32f2f;
+        }
+        .success {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>📷 StudioFoto Pro</h1>
+        <p>Website Jasa Fotografi Profesional & Modern</p>
+    </header>
+
+    <div class="content">
+        <!-- Project Stats -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="number">20+</div>
+                <div class="label">Files</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">3000+</div>
+                <div class="label">Lines of Code</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">50+</div>
+                <div class="label">Features</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">6</div>
+                <div class="label">Database Tables</div>
+            </div>
+        </div>
+
+        <!-- Public Pages Section -->
+        <div class="section">
+            <h2>🌐 Halaman Publik (Frontend)</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🏠 Beranda</h3>
+                    <p><strong>File:</strong> index.php</p>
+                    <p>Halaman utama dengan hero section, layanan, CTA button</p>
+                </div>
+                <div class="card">
+                    <h3>👥 Tentang Kami</h3>
+                    <p><strong>File:</strong> about.php</p>
+                    <p>Informasi studio, tim profesional, pengalaman, statistik</p>
+                </div>
+                <div class="card">
+                    <h3>📷 Portofolio</h3>
+                    <p><strong>File:</strong> portfolio.php</p>
+                    <p>Galeri foto dinamis dengan filter kategori & modal detail</p>
+                </div>
+                <div class="card">
+                    <h3>💰 Paket Fotografi</h3>
+                    <p><strong>File:</strong> packages.php</p>
+                    <p>Daftar paket dengan harga, fitur, FAQ section</p>
+                </div>
+                <div class="card">
+                    <h3>📅 Pemesanan</h3>
+                    <p><strong>File:</strong> booking.php</p>
+                    <p>Form pemesanan dengan validasi & confirmation</p>
+                </div>
+                <div class="card">
+                    <h3>📞 Kontak</h3>
+                    <p><strong>File:</strong> contact.php</p>
+                    <p>Form kontak & informasi lengkap studio</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Panel Section -->
+        <div class="section">
+            <h2>🔧 Admin Panel (/admin)</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🔐 Login</h3>
+                    <p><strong>File:</strong> login.php</p>
+                    <p>Autentikasi admin dengan password hashing</p>
+                    <div class="code-box">Default: admin / admin123</div>
+                </div>
+                <div class="card">
+                    <h3>📊 Dashboard</h3>
+                    <p><strong>File:</strong> dashboard.php</p>
+                    <p>Statistik dan ringkasan terbaru dengan data cards</p>
+                </div>
+                <div class="card">
+                    <h3>📸 Portfolio CRUD</h3>
+                    <p><strong>File:</strong> portfolio-crud.php</p>
+                    <p>Tambah/edit/hapus foto portofolio dengan kategori</p>
+                </div>
+                <div class="card">
+                    <h3>📦 Package CRUD</h3>
+                    <p><strong>File:</strong> packages-crud.php</p>
+                    <p>Kelola paket fotografi dan harga</p>
+                </div>
+                <div class="card">
+                    <h3>📅 Booking Manager</h3>
+                    <p><strong>File:</strong> bookings.php</p>
+                    <p>Lihat & update status pemesanan dengan filter</p>
+                </div>
+                <div class="card">
+                    <h3>💬 Message Manager</h3>
+                    <p><strong>File:</strong> messages.php</p>
+                    <p>Kelola pesan kontak dengan mark as read</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supporting Files Section -->
+        <div class="section">
+            <h2>⚙️ Supporting Files</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🔌 Config & Includes</h3>
+                    <p><strong>Folder:</strong> /includes</p>
+                    <ul class="feature-list">
+                        <li>config.php - Database & helpers</li>
+                        <li>header.php - Navbar template</li>
+                        <li>footer.php - Footer template</li>
+                        <li>get-portfolio.php - API endpoint</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🎨 Styling</h3>
+                    <p><strong>Folder:</strong> /css</p>
+                    <ul class="feature-list">
+                        <li>style.css - Frontend responsive</li>
+                        <li>admin.css - Admin panel styling</li>
+                        <li>~1200 lines total</li>
+                        <li>Mobile-optimized</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>✨ JavaScript</h3>
+                    <p><strong>Folder:</strong> /js</p>
+                    <ul class="feature-list">
+                        <li>script.js - Interactivity</li>
+                        <li>Form validation</li>
+                        <li>AJAX interactions</li>
+                        <li>~300 lines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Section -->
+        <div class="section">
+            <h2>🗄️ Database</h2>
+            <div class="card">
+                <h3>SQL Setup</h3>
+                <p><strong>File:</strong> database/setup.sql</p>
+                <p>Database schema dengan 6 tabel dan sample data:</p>
+                <ul class="feature-list">
+                    <li><strong>admin</strong> - User authentication</li>
+                    <li><strong>kategori</strong> - Portfolio categories</li>
+                    <li><strong>portofolio</strong> - Photo collection</li>
+                    <li><strong>paket</strong> - Service packages</li>
+                    <li><strong>pemesanan</strong> - Bookings</li>
+                    <li><strong>kontak</strong> - Contact messages</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Quick Start -->
+        <div class="section">
+            <h2>🚀 Quick Start</h2>
+            <div class="success">
+                <strong>✓ Installation Steps:</strong>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>Copy folder ke D:\xampp\htdocs\photography</li>
+                    <li>Buka phpMyAdmin & import database/setup.sql</li>
+                    <li>Update DB credentials di includes/config.php</li>
+                    <li>Akses: http://localhost/photography/</li>
+                    <li>Admin: http://localhost/photography/admin/</li>
+                </ol>
+            </div>
+            <div class="warning">
+                <strong>⚠ Important:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Ubah password admin default setelah instalasi</li>
+                    <li>Pastikan folder assets/images/ writable</li>
+                    <li>Update database credentials untuk production</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="section">
+            <h2>✨ Fitur Utama</h2>
+            <ul class="feature-list">
+                <li>Responsive design (mobile, tablet, desktop)</li>
+                <li>Modern UI dengan warna elegan (hitam, putih, emas)</li>
+                <li>Full admin panel dengan CRUD operations</li>
+                <li>MySQL database dengan 6 tabel</li>
+                <li>Session-based authentication</li>
+                <li>Form validation & error handling</li>
+                <li>Modal & AJAX interactions</li>
+                <li>Font Awesome icons</li>
+                <li>Smooth animations & transitions</li>
+                <li>SQL injection prevention</li>
+                <li>Password hashing & security</li>
+                <li>Portfolio gallery dengan filter</li>
+                <li>Booking system dengan status tracking</li>
+                <li>Contact form management</li>
+                <li>Admin dashboard dengan statistik</li>
+            </ul>
+        </div>
+
+        <!-- Helper Functions -->
+        <div class="section">
+            <h2>🛠️ Helper Functions (config.php)</h2>
+            <div class="code-box">
+escape($str) - Sanitize input untuk SQL injection<br>
+query($sql) - SELECT multiple rows<br>
+querySingle($sql) - SELECT single row<br>
+execute($sql) - INSERT/UPDATE/DELETE<br>
+formatRupiah($num) - Format currency<br>
+formatTanggal($date) - Format date Indonesia
+            </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div class="section">
+            <h2>🔨 Technology Stack</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Frontend</h3>
+                    <ul class="feature-list">
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>JavaScript ES6</li>
+                        <li>Font Awesome 6.0.0</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Backend</h3>
+                    <ul class="feature-list">
+                        <li>PHP 7.4+</li>
+                        <li>MySQL 5.7+</li>
+                        <li>Apache Server</li>
+                        <li>Session Management</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Tools</h3>
+                    <ul class="feature-list">
+                        <li>XAMPP/LAMPP</li>
+                        <li>phpMyAdmin</li>
+                        <li>VS Code</li>
+                        <li>Git (optional)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-group" style="margin-top: 40px; justify-content: center;">
+            <a href="README.md" class="btn btn-primary">📖 Read Full Documentation</a>
+            <a href="admin/login.php" class="btn">🔐 Go to Admin Panel</a>
+            <a href="index.php" class="btn">🌐 View Website</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>StudioFoto Pro © 2024 | Website Jasa Fotografi Profesional & Modern</p>
+        <p style="margin-top: 10px; font-size: 0.9em;">Created with ❤️ for your photography business</p>
+    </footer>
+</div>
+
+</body>
+</html>
