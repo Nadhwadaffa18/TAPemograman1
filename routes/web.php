@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PortfolioController;
@@ -10,14 +12,31 @@ use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AuthController;
 
-// Setup Route - Run migrations (visit once to setup database)
+// Full Setup Route - Run migrations and show status
 Route::get('/setup-database', function () {
+    $output = '<h2>Database Setup</h2>';
+    
     try {
+        // Run migrations
         Artisan::call('migrate', ['--force' => true]);
-        return 'Database migrated successfully!<br><pre>' . Artisan::output() . '</pre><br><a href="/create-admin">Next: Create Admin User</a>';
+        $output .= '<h3>Migration Output:</h3><pre>' . Artisan::output() . '</pre>';
+        
+        // Check tables
+        $output .= '<h3>Tables Status:</h3>';
+        $tables = ['users', 'portfolios', 'services', 'pesan'];
+        foreach ($tables as $table) {
+            $exists = Schema::hasTable($table);
+            $status = $exists ? '✅ EXISTS' : '❌ NOT FOUND';
+            $output .= "<p>Table <strong>$table</strong>: $status</p>";
+        }
+        
+        $output .= '<br><a href="/create-admin">Create Admin User</a> | <a href="/">Go to Home</a>';
+        
     } catch (\Exception $e) {
-        return 'Migration error: ' . $e->getMessage();
+        $output .= '<p style="color:red;">Error: ' . $e->getMessage() . '</p>';
     }
+    
+    return $output;
 });
 
 // Create Admin User Route
