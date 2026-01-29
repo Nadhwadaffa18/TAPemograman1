@@ -12,16 +12,58 @@ use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AuthController;
 
-// Full Setup Route - Run migrations and show status
+// Full Setup Route - Create tables directly without migration
 Route::get('/setup-database', function () {
     $output = '<h2>Database Setup</h2>';
     
     try {
-        // Run migrations
-        Artisan::call('migrate', ['--force' => true]);
-        $output .= '<h3>Migration Output:</h3><pre>' . Artisan::output() . '</pre>';
+        // Create tables if not exist
+        if (!Schema::hasTable('portfolios')) {
+            Schema::create('portfolios', function ($table) {
+                $table->id();
+                $table->text('image');
+                $table->text('description');
+                $table->timestamps();
+            });
+            $output .= '<p>✅ Created table: portfolios</p>';
+        } else {
+            $output .= '<p>ℹ️ Table portfolios already exists</p>';
+        }
+
+        if (!Schema::hasTable('pesan')) {
+            Schema::create('pesan', function ($table) {
+                $table->id();
+                $table->string('nama');
+                $table->string('email');
+                $table->string('paket')->nullable();
+                $table->text('pesan');
+                $table->boolean('is_read')->default(false);
+                $table->timestamps();
+            });
+            $output .= '<p>✅ Created table: pesan</p>';
+        } else {
+            $output .= '<p>ℹ️ Table pesan already exists</p>';
+        }
+
+        if (!Schema::hasTable('services')) {
+            Schema::create('services', function ($table) {
+                $table->id();
+                $table->string('nama');
+                $table->string('icon')->default('bi-camera');
+                $table->text('deskripsi');
+                $table->decimal('harga', 12, 0)->default(0);
+                $table->string('satuan')->nullable();
+                $table->enum('tipe', ['layanan', 'paket'])->default('layanan');
+                $table->boolean('is_featured')->default(false);
+                $table->integer('urutan')->default(0);
+                $table->timestamps();
+            });
+            $output .= '<p>✅ Created table: services</p>';
+        } else {
+            $output .= '<p>ℹ️ Table services already exists</p>';
+        }
         
-        // Check tables
+        // Check all tables
         $output .= '<h3>Tables Status:</h3>';
         $tables = ['users', 'portfolios', 'services', 'pesan'];
         foreach ($tables as $table) {

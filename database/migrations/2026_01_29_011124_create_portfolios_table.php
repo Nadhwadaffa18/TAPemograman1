@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('portfolios', function (Blueprint $table) {
             $table->id();
-            $table->string('image'); // Sesuai kolom di phpMyAdmin lokal
-            $table->text('description'); // Sesuai kolom di phpMyAdmin lokal
+            $table->text('image'); // TEXT untuk URL panjang
+            $table->text('description');
             $table->timestamps();
         });
     }
