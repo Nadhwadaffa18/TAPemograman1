@@ -2,6 +2,10 @@
 
 @section('title', 'Portofolio - Studio Fotografi')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ secure_asset('css/portfolio.css') }}">
+@endpush
+
 @section('content')
 <section class="portfolio">
     <div class="portfolio-header">

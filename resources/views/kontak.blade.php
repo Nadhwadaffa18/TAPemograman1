@@ -2,6 +2,10 @@
 
 @section('title', 'Kontak - Studio Fotografi')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ secure_asset('css/contact.css') }}">
+@endpush
+
 @section('content')
 <section class="contact">
     <div class="contact-wrapper">

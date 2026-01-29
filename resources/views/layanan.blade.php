@@ -2,6 +2,10 @@
 
 @section('title', 'Layanan - Studio Fotografi')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ secure_asset('css/services.css') }}">
+@endpush
+
 @section('content')
 <section class="services">
     <div class="services-header">

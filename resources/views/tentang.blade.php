@@ -2,6 +2,10 @@
 
 @section('title', 'Tentang Kami - Studio Fotografi')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ secure_asset('css/about.css') }}">
+@endpush
+
 @section('content')
 <section class="about">
     <div class="about-container">
