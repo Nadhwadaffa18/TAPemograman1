@@ -427,6 +427,11 @@
             <div class="sidebar-nav">
                 <div class="nav-section">
                     <div class="nav-section-title">Menu Utama</div>
+                    <a class="nav-link {{ request()->routeIs('dashboard') || request()->routeIs('admin.dashboard') ? 'active' : '' }}" 
+                       href="{{ route('dashboard') }}">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
                     <a class="nav-link {{ request()->routeIs('portfolios.*') ? 'active' : '' }}" 
                        href="{{ route('portfolios.index') }}">
                         <i class="bi bi-images"></i>

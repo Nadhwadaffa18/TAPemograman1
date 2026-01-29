@@ -11,6 +11,8 @@ use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Middleware\TrackVisitor;
 
 // Full Setup Route - Create tables directly without migration
 Route::get('/setup-database', function () {
@@ -62,10 +64,29 @@ Route::get('/setup-database', function () {
         } else {
             $output .= '<p>ℹ️ Table services already exists</p>';
         }
+
+        if (!Schema::hasTable('visitors')) {
+            Schema::create('visitors', function ($table) {
+                $table->id();
+                $table->string('ip_address', 45)->nullable();
+                $table->text('user_agent')->nullable();
+                $table->string('page_visited')->nullable();
+                $table->text('referrer')->nullable();
+                $table->string('country')->nullable();
+                $table->string('city')->nullable();
+                $table->string('device')->nullable();
+                $table->string('browser')->nullable();
+                $table->timestamp('visited_at')->nullable();
+                $table->timestamps();
+            });
+            $output .= '<p>✅ Created table: visitors</p>';
+        } else {
+            $output .= '<p>ℹ️ Table visitors already exists</p>';
+        }
         
         // Check all tables
         $output .= '<h3>Tables Status:</h3>';
-        $tables = ['users', 'portfolios', 'services', 'pesan'];
+        $tables = ['users', 'portfolios', 'services', 'pesan', 'visitors'];
         foreach ($tables as $table) {
             $exists = Schema::hasTable($table);
             $status = $exists ? '✅ EXISTS' : '❌ NOT FOUND';
@@ -179,13 +200,15 @@ Route::get('/check-portfolios', function () {
     }
 });
 
-// Public Routes
-Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/tentang', [PageController::class, 'tentang'])->name('tentang');
-Route::get('/layanan', [PageController::class, 'layanan'])->name('layanan');
-Route::get('/portofolio', [PageController::class, 'portofolio'])->name('portofolio');
-Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
-Route::post('/kontak', [PageController::class, 'kontakStore'])->name('kontak.store');
+// Public Routes - with visitor tracking
+Route::middleware([TrackVisitor::class])->group(function () {
+    Route::get('/', [PageController::class, 'home'])->name('home');
+    Route::get('/tentang', [PageController::class, 'tentang'])->name('tentang');
+    Route::get('/layanan', [PageController::class, 'layanan'])->name('layanan');
+    Route::get('/portofolio', [PageController::class, 'portofolio'])->name('portofolio');
+    Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
+    Route::post('/kontak', [PageController::class, 'kontakStore'])->name('kontak.store');
+});
 
 // Auth Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -195,6 +218,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Admin Routes - Protected by Auth Middleware
 Route::prefix('admin')->middleware('auth')->group(function () {
     
+    // Dashboard
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
     // Portfolio
     Route::name('portfolios.')->group(function () {
         Route::get('portfolios', [PortfolioController::class, 'index'])->name('index');
