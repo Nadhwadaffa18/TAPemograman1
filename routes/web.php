@@ -61,6 +61,39 @@ Route::get('/check-users', function () {
     }
 });
 
+// Test login route
+Route::get('/test-login', function () {
+    try {
+        $user = User::where('email', 'admin@studio.com')->first();
+        if (!$user) {
+            return 'User not found! <a href="/create-admin">Create Admin</a>';
+        }
+        
+        $output = '<h3>Test Login Debug:</h3>';
+        $output .= '<p>User found: ' . $user->email . '</p>';
+        $output .= '<p>Password hash: ' . substr($user->password, 0, 20) . '...</p>';
+        
+        // Test password
+        $testPassword = 'admin123';
+        $isValid = Hash::check($testPassword, $user->password);
+        $output .= '<p>Password "admin123" valid: ' . ($isValid ? 'YES ✓' : 'NO ✗') . '</p>';
+        
+        if ($isValid) {
+            // Try manual login
+            \Illuminate\Support\Facades\Auth::login($user);
+            if (\Illuminate\Support\Facades\Auth::check()) {
+                $output .= '<p style="color:green;">Login successful! <a href="/admin/portfolios">Go to Admin</a></p>';
+            } else {
+                $output .= '<p style="color:red;">Auth::login failed</p>';
+            }
+        }
+        
+        return $output;
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
+
 // Public Routes
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/tentang', [PageController::class, 'tentang'])->name('tentang');
