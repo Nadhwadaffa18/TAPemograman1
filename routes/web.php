@@ -23,20 +23,41 @@ Route::get('/setup-database', function () {
 // Create Admin User Route
 Route::get('/create-admin', function () {
     try {
-        $admin = User::updateOrCreate(
-            ['email' => 'admin@studio.com'],
-            [
-                'name' => 'Admin',
-                'email' => 'admin@studio.com',
-                'password' => Hash::make('admin123'),
-            ]
-        );
+        // Delete existing admin first, then create new
+        User::where('email', 'admin@studio.com')->delete();
+        
+        $admin = User::create([
+            'name' => 'Admin',
+            'email' => 'admin@studio.com',
+            'password' => Hash::make('admin123'),
+        ]);
+        
         return 'Admin user created successfully!<br><br>
+                <strong>ID:</strong> ' . $admin->id . '<br>
                 <strong>Email:</strong> admin@studio.com<br>
                 <strong>Password:</strong> admin123<br><br>
                 <a href="/login">Go to Login</a>';
     } catch (\Exception $e) {
         return 'Error creating admin: ' . $e->getMessage();
+    }
+});
+
+// Check users in database
+Route::get('/check-users', function () {
+    try {
+        $users = User::all();
+        $output = '<h3>Users in Database:</h3>';
+        if ($users->isEmpty()) {
+            $output .= '<p>No users found. <a href="/create-admin">Create Admin</a></p>';
+        } else {
+            foreach ($users as $user) {
+                $output .= '<p>ID: ' . $user->id . ' | Name: ' . $user->name . ' | Email: ' . $user->email . '</p>';
+            }
+        }
+        $output .= '<br><a href="/create-admin">Recreate Admin</a> | <a href="/login">Login</a>';
+        return $output;
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage() . '<br><a href="/setup-database">Run Setup Database</a>';
     }
 });
 
