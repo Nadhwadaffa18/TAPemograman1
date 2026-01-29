@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PesanController;
@@ -12,9 +14,29 @@ use App\Http\Controllers\AuthController;
 Route::get('/setup-database', function () {
     try {
         Artisan::call('migrate', ['--force' => true]);
-        return 'Database migrated successfully!<br><pre>' . Artisan::output() . '</pre><br><a href="/">Go to Home</a>';
+        return 'Database migrated successfully!<br><pre>' . Artisan::output() . '</pre><br><a href="/create-admin">Next: Create Admin User</a>';
     } catch (\Exception $e) {
         return 'Migration error: ' . $e->getMessage();
+    }
+});
+
+// Create Admin User Route
+Route::get('/create-admin', function () {
+    try {
+        $admin = User::updateOrCreate(
+            ['email' => 'admin@studio.com'],
+            [
+                'name' => 'Admin',
+                'email' => 'admin@studio.com',
+                'password' => Hash::make('admin123'),
+            ]
+        );
+        return 'Admin user created successfully!<br><br>
+                <strong>Email:</strong> admin@studio.com<br>
+                <strong>Password:</strong> admin123<br><br>
+                <a href="/login">Go to Login</a>';
+    } catch (\Exception $e) {
+        return 'Error creating admin: ' . $e->getMessage();
     }
 });
 
