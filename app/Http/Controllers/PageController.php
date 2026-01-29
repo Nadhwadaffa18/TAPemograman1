@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Portfolio;
 use App\Models\Service;
-use App\Models\pesan;
+use App\Models\Pesan;
 use Illuminate\Support\Facades\Schema;
 
 class PageController extends Controller
@@ -76,7 +76,7 @@ class PageController extends Controller
             'pesan' => 'required|string',
         ]);
 
-        pesan::create([
+        Pesan::create([
             'nama' => $request->nama,
             'email' => $request->email,
             'paket' => $request->paket,
