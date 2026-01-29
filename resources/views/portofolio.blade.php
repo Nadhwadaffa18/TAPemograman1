@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Portofolio - Blog Fotografi Daffa')
+@section('title', 'Portofolio - Studio Fotografi')
 
 @section('content')
 <section class="portfolio">
     <div class="portfolio-header">
         <span class="section-subtitle">Portofolio</span>
-        <h1>Karya Pilihan</h1>
+        <h1>Karya Pilihan Kami</h1>
         <p>
-            Setiap foto adalah cerita yang saya abadikan
-            melalui cahaya, komposisi, dan rasa.
+            Setiap foto adalah cerita yang kami abadikan
+            melalui cahaya, komposisi, dan sentuhan artistik.
         </p>
     </div>
 
@@ -20,9 +20,7 @@
                     src="{{ $portfolio->image }}" 
                     alt="Portfolio"
                     loading="lazy"
-                    style="width: 100%; height: 100%; object-fit: cover;"
                 >
-
                 <div class="portfolio-overlay">
                     <p class="portfolio-description">
                         {{ $portfolio->description }}
@@ -30,9 +28,12 @@
                 </div>
             </div>
         @empty
-            <p style="grid-column:1/-1;text-align:center;">
-                Belum ada portofolio
-            </p>
+            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
+                <i class="bi bi-images" style="font-size: 64px; color: rgba(255,255,255,0.3);"></i>
+                <p style="color: rgba(255,255,255,0.6); margin-top: 20px; font-size: 18px;">
+                    Belum ada portofolio yang ditambahkan
+                </p>
+            </div>
         @endforelse
     </div>
 </section>
