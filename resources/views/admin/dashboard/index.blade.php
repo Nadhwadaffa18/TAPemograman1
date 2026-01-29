@@ -227,9 +227,17 @@
         font-size: 14px;
     }
 
+    .device-item, .browser-item {
+        color: #ffffff;
+    }
+
     .device-item i, .browser-item i {
         margin-right: 8px;
         color: var(--accent);
+    }
+
+    .device-item span, .browser-item span {
+        color: #ffffff;
     }
 
     code {
@@ -246,6 +254,7 @@
 
     .badge.bg-secondary {
         background: var(--border-color) !important;
+        color: #ffffff !important;
     }
 </style>
 @endsection
