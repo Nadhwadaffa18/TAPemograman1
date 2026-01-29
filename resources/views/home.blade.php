@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-<<<<<<< HEAD
 @section('title', 'Beranda - Studio Fotografi')
 
 @section('content')
@@ -27,23 +26,5 @@
             </a>
         </div>
     </div>
-=======
-@section('title', 'Beranda - Blog Fotografi')
-
-@push('styles')
-    <link rel="stylesheet" href="{{ secure_asset('css/home.css') }}">
-@endpush
-
-@section('content')
-<section class="hero">
-    <h1>Beberapa Karya Foto Studio</h1>
-
-    <p>
-        Selamat datang di portofolio dan blog fotografi saya.
-        Lihat karya saya dan hubungi saya untuk sesi pemotretan.
-    </p>
-
-    <a href="{{ url('/portofolio') }}" class="btn-primary">Lihat Portofolio</a>
->>>>>>> ca65ff439d42d0a5fd1da696e7d13b501fd1b587
 </section>
 @endsection
