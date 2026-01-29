@@ -155,6 +155,30 @@ Route::get('/test-login', function () {
     }
 });
 
+// Debug portfolio images
+Route::get('/check-portfolios', function () {
+    try {
+        $portfolios = \App\Models\Portfolio::all();
+        $output = '<h3>Portfolios in Database:</h3>';
+        if ($portfolios->isEmpty()) {
+            $output .= '<p>No portfolios found.</p>';
+        } else {
+            foreach ($portfolios as $p) {
+                $output .= '<div style="margin-bottom:20px; padding:10px; border:1px solid #ccc;">';
+                $output .= '<p><strong>ID:</strong> ' . $p->id . '</p>';
+                $output .= '<p><strong>Description:</strong> ' . $p->description . '</p>';
+                $output .= '<p><strong>Image URL:</strong> <code>' . htmlspecialchars($p->image) . '</code></p>';
+                $output .= '<p><strong>Preview:</strong></p>';
+                $output .= '<img src="' . $p->image . '" style="max-width:300px; border:1px solid #ddd;" onerror="this.style.border=\'3px solid red\'; this.alt=\'GAGAL LOAD - URL tidak valid\';">';
+                $output .= '</div>';
+            }
+        }
+        return $output;
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
+
 // Public Routes
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/tentang', [PageController::class, 'tentang'])->name('tentang');
