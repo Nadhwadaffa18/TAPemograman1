@@ -1,11 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AuthController;
+
+// Setup Route - Run migrations (visit once to setup database)
+Route::get('/setup-database', function () {
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        return 'Database migrated successfully!<br><pre>' . Artisan::output() . '</pre><br><a href="/">Go to Home</a>';
+    } catch (\Exception $e) {
+        return 'Migration error: ' . $e->getMessage();
+    }
+});
 
 // Public Routes
 Route::get('/', [PageController::class, 'home'])->name('home');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Portfolio;
 use App\Models\Service;
 use App\Models\pesan;
+use Illuminate\Support\Facades\Schema;
 
 class PageController extends Controller
 {
@@ -21,24 +22,48 @@ class PageController extends Controller
 
     public function layanan()
     {
-        $layanan = Service::where('tipe', 'layanan')->orderBy('urutan')->get();
-        $paket = Service::where('tipe', 'paket')->orderBy('urutan')->get();
+        try {
+            if (Schema::hasTable('services')) {
+                $layanan = Service::where('tipe', 'layanan')->orderBy('urutan')->get();
+                $paket = Service::where('tipe', 'paket')->orderBy('urutan')->get();
+            } else {
+                $layanan = collect([]);
+                $paket = collect([]);
+            }
+        } catch (\Exception $e) {
+            $layanan = collect([]);
+            $paket = collect([]);
+        }
         
         return view('layanan', compact('layanan', 'paket'));
     }
 
     public function portofolio()
     {
-        // AMBIL DATA DARI DATABASE
-        $portfolios = Portfolio::latest()->get();
+        try {
+            if (Schema::hasTable('portfolios')) {
+                $portfolios = Portfolio::latest()->get();
+            } else {
+                $portfolios = collect([]);
+            }
+        } catch (\Exception $e) {
+            $portfolios = collect([]);
+        }
 
-        // KIRIM KE BLADE
         return view('portofolio', compact('portfolios'));
     }
 
     public function kontak()
     {
-        $services = Service::orderBy('urutan')->get();
+        try {
+            if (Schema::hasTable('services')) {
+                $services = Service::orderBy('urutan')->get();
+            } else {
+                $services = collect([]);
+            }
+        } catch (\Exception $e) {
+            $services = collect([]);
+        }
         return view('kontak', compact('services'));
     }
 
