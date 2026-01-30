@@ -23,6 +23,7 @@ class PortfolioController extends Controller
         $validated = $request->validate([
             'image' => 'required|url',
             'description' => 'required|string|min:10',
+            'price' => 'nullable|numeric|min:0',
         ]);
 
         Portfolio::create($validated);
@@ -47,6 +48,7 @@ class PortfolioController extends Controller
         $validated = $request->validate([
             'image' => 'nullable|url',
             'description' => 'required|string|min:10',
+            'price' => 'nullable|numeric|min:0',
         ]);
 
         $portfolio->update($validated);
