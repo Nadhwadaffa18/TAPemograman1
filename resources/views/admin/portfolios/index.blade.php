@@ -37,7 +37,7 @@
                             {{-- GAMBAR --}}
                             <td>
                                 <img
-                                    src="{{ $portfolio->image_path }}"
+                                    src="{{ $portfolio->image }}"
                                     alt="Portfolio Image"
                                     class="img-thumbnail"
                                     style="width:80px;height:80px;object-fit:cover;"

@@ -15,7 +15,7 @@
 
                 {{-- GAMBAR --}}
                 <img
-                    src="{{ $portfolio->image_path }}"
+                    src="{{ $portfolio->image }}"
                     alt="Portfolio Image"
                     class="img-fluid rounded mb-4"
                     style="max-height:450px;width:100%;object-fit:cover;"
