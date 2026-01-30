@@ -77,6 +77,33 @@
                         @enderror
                     </div>
 
+                    {{-- Harga --}}
+                    <div class="mb-4">
+                        <label for="price" class="form-label">
+                            <i class="bi bi-currency-dollar"></i> Daftar Harga
+                        </label>
+
+                        <input type="number"
+                               class="form-control @error('price') is-invalid @enderror"
+                               id="price"
+                               name="price"
+                               placeholder="Contoh: 5000000"
+                               value="{{ old('price', $portfolio->price) }}"
+                               step="0.01"
+                               min="0">
+
+                        <small class="text-muted d-block mt-2">
+                            <i class="bi bi-info-circle"></i>
+                            Masukkan harga dalam Rupiah (opsional)
+                        </small>
+
+                        @error('price')
+                            <div class="invalid-feedback d-block mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
                     <div class="d-flex gap-2 pt-3 border-top">
                         <button type="submit" class="btn btn-primary">
                             <i class="bi bi-check-circle"></i> Perbarui Portfolio

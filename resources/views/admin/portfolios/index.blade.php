@@ -26,6 +26,7 @@
                             <th width="60">No</th>
                             <th width="120">Gambar</th>
                             <th>Deskripsi</th>
+                            <th width="150">Daftar Harga</th>
                             <th class="text-center" width="180">Aksi</th>
                         </tr>
                     </thead>
@@ -49,6 +50,15 @@
                                 <small class="text-muted">
                                     {{ Str::limit($portfolio->description, 70) }}
                                 </small>
+                            </td>
+
+                            {{-- HARGA --}}
+                            <td>
+                                @if($portfolio->price)
+                                    <strong class="text-success">Rp {{ number_format($portfolio->price, 0, ',', '.') }}</strong>
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
                             </td>
 
                             {{-- AKSI --}}

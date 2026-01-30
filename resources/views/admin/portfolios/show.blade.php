@@ -27,6 +27,17 @@
                     {{ $portfolio->description }}
                 </p>
 
+                {{-- HARGA --}}
+                @if($portfolio->price)
+                <div class="mt-3">
+                    <h4>Daftar Harga</h4>
+                    <h3 class="text-success">
+                        <i class="bi bi-currency-dollar"></i>
+                        Rp {{ number_format($portfolio->price, 0, ',', '.') }}
+                    </h3>
+                </div>
+                @endif
+
                 <hr>
 
                 {{-- TANGGAL --}}
@@ -80,6 +91,16 @@
                         <td class="text-end"><strong>{{ $portfolio->id }}</strong></td>
                     </tr>
                     <tr>
+                        <td class="text-muted">Harga</td>
+                        <td class="text-end">
+                            @if($portfolio->price)
+                                <strong class="text-success">Rp {{ number_format($portfolio->price, 0, ',', '.') }}</strong>
+                            @else
+                                <span class="text-muted">-</span>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="text-muted">Status</td>
                         <td class="text-end">
                             <span class="badge bg-success">Aktif</span>
@@ -88,7 +109,7 @@
                     <tr>
                         <td class="text-muted">Gambar</td>
                         <td class="text-end">
-                            <a href="{{ $portfolio->image_path }}" target="_blank">
+                            <a href="{{ $portfolio->image }}" target="_blank">
                                 Lihat Gambar
                             </a>
                         </td>

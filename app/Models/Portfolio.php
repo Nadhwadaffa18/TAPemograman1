@@ -13,6 +13,7 @@ class Portfolio extends Model
 
     protected $fillable = [
         'image',
-        'description'
+        'description',
+        'price'
     ];
 }
