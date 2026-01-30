@@ -22,15 +22,15 @@
                 >
 
                 {{-- DESKRIPSI --}}
-                <h4>Deskripsi</h4>
-                <p class="text-muted" style="line-height:1.8;">
+                <h4 class="text-light">Deskripsi</h4>
+                <p class="text-light" style="line-height:1.8;">
                     {{ $portfolio->description }}
                 </p>
 
                 {{-- HARGA --}}
                 @if($portfolio->price)
                 <div class="mt-3">
-                    <h4>Daftar Harga</h4>
+                    <h4 class="text-light">Daftar Harga</h4>
                     <h3 class="text-success">
                         <i class="bi bi-currency-dollar"></i>
                         Rp {{ number_format($portfolio->price, 0, ',', '.') }}
@@ -41,14 +41,14 @@
                 <hr>
 
                 {{-- TANGGAL --}}
-                <div class="row small text-muted">
+                <div class="row small">
                     <div class="col-md-6">
-                        <strong class="text-dark">Dibuat:</strong><br>
-                        {{ $portfolio->created_at->format('d F Y H:i') }}
+                        <strong class="text-light">Dibuat:</strong><br>
+                        <span class="text-light">{{ $portfolio->created_at->format('d F Y H:i') }}</span>
                     </div>
                     <div class="col-md-6">
-                        <strong class="text-dark">Diperbarui:</strong><br>
-                        {{ $portfolio->updated_at->format('d F Y H:i') }}
+                        <strong class="text-light">Diperbarui:</strong><br>
+                        <span class="text-light">{{ $portfolio->updated_at->format('d F Y H:i') }}</span>
                     </div>
                 </div>
 
