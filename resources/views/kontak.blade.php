@@ -21,7 +21,7 @@
             <ul class="contact-list">
                 <li>
                     <i class="bi bi-envelope"></i>
-                    studio@email.com
+                    studioFT@email.com
                 </li>
                 <li>
                     <i class="bi bi-instagram"></i>
@@ -29,11 +29,11 @@
                 </li>
                 <li>
                     <i class="bi bi-geo-alt"></i>
-                    Indonesia
+                    Bandung - Jawa Barat - Indonesia
                 </li>
                 <li>
                     <i class="bi bi-telephone"></i>
-                    +62 812 3456 7890
+                    +62 831 0746 9937
                 </li>
             </ul>
         </div>
