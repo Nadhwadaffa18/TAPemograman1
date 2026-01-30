@@ -20,12 +20,14 @@
     <div class="portfolio-grid">
         @forelse($portfolios as $portfolio)
             <div class="portfolio-item">
-                <img 
-                    src="{{ $portfolio->image }}" 
-                    alt="Portfolio"
-                    loading="lazy"
-                >
-                <div class="portfolio-overlay">
+                <div class="portfolio-image-wrapper">
+                    <img 
+                        src="{{ $portfolio->image }}" 
+                        alt="Portfolio"
+                        loading="lazy"
+                    >
+                </div>
+                <div class="portfolio-info">
                     <p class="portfolio-description">
                         {{ $portfolio->description }}
                     </p>
