@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class PortfolioController extends Controller
 {
@@ -25,6 +26,11 @@ class PortfolioController extends Controller
             'description' => 'required|string|min:10',
             'price' => 'nullable|numeric|min:0',
         ]);
+
+        // Remove price if column doesn't exist
+        if (!Schema::hasColumn('portfolios', 'price')) {
+            unset($validated['price']);
+        }
 
         Portfolio::create($validated);
 
@@ -50,6 +56,11 @@ class PortfolioController extends Controller
             'description' => 'required|string|min:10',
             'price' => 'nullable|numeric|min:0',
         ]);
+
+        // Remove price if column doesn't exist
+        if (!Schema::hasColumn('portfolios', 'price')) {
+            unset($validated['price']);
+        }
 
         $portfolio->update($validated);
 
