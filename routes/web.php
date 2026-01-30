@@ -207,6 +207,7 @@ Route::middleware([TrackVisitor::class])->group(function () {
     Route::get('/layanan', [PageController::class, 'layanan'])->name('layanan');
     Route::get('/portofolio', [PageController::class, 'portofolio'])->name('portofolio');
     Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
+    Route::get('/promo', [PageController::class, 'promo'])->name('promo');
     Route::post('/kontak', [PageController::class, 'kontakStore'])->name('kontak.store');
 });
 

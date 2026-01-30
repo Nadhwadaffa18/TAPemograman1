@@ -14,6 +14,7 @@
             <a class="{{ request()->routeIs('layanan') ? 'active' : '' }}" href="{{ route('layanan') }}">Layanan</a>
             <a class="{{ request()->routeIs('portofolio') ? 'active' : '' }}" href="{{ route('portofolio') }}">Portofolio</a>
             <a class="{{ request()->routeIs('kontak') ? 'active' : '' }}" href="{{ route('kontak') }}">Kontak</a>
+            <a class="{{ request()->routeIs('promo') ? 'active' : '' }}" href="{{ route('promo') }}">Promo</a>
             @auth
                 <a href="{{ route('portfolios.index') }}" class="admin-link"><i class="bi bi-speedometer2"></i> Admin</a>
             @else

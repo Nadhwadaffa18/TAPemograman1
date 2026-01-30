@@ -1,0 +1,454 @@
+/* =========================
+   PROMO SECTION - DARK
+========================= */
+.promo {
+    padding: 140px 40px;
+    background: var(--bg-dark);
+}
+
+.promo-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 100px;
+}
+
+.promo-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    margin-bottom: 20px;
+    color: var(--text-white);
+    font-weight: 400;
+}
+
+.promo-header p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text-muted);
+}
+
+/* Promo Cards Wrapper */
+.promo-cards-wrapper {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 100px;
+}
+
+.promo-card {
+    padding: 50px 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.promo-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), rgba(201, 169, 98, 0));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: var(--transition);
+}
+
+.promo-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(201, 169, 98, 0.1);
+}
+
+.promo-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Badge */
+.promo-badge {
+    position: absolute;
+    top: 20px;
+    right: -35px;
+    padding: 8px 50px;
+    background: var(--accent);
+    color: var(--bg-dark);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transform: rotate(45deg);
+    transition: var(--transition);
+}
+
+.promo-card:hover .promo-badge {
+    right: -40px;
+    top: 15px;
+}
+
+/* Icon */
+.promo-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--accent-soft);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--accent);
+    margin-bottom: 30px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.promo-card:hover .promo-icon {
+    background: rgba(201, 169, 98, 0.2);
+    transform: scale(1.1);
+}
+
+/* Title */
+.promo-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: var(--text-white);
+    font-weight: 400;
+}
+
+/* Description */
+.promo-description {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+/* Price Section */
+.promo-price {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(201, 169, 98, 0.08);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.original-price {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+
+.discount-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.discount-badge {
+    background: var(--accent);
+    color: var(--bg-dark);
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    margin-left: auto;
+}
+
+/* Validity */
+.promo-validity {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 10px 0 20px 0;
+    padding: 10px;
+    border-left: 2px solid var(--accent);
+    padding-left: 15px;
+}
+
+/* Button */
+.promo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: var(--transition);
+    border-radius: 4px;
+    margin-top: auto;
+}
+
+.promo-btn:hover {
+    background: var(--accent);
+    color: var(--bg-dark);
+    box-shadow: 0 10px 30px rgba(201, 169, 98, 0.3);
+}
+
+/* Card Color Variants */
+.promo-card-primary {
+    border-top: 2px solid var(--accent);
+}
+
+.promo-card-secondary {
+    border-top: 2px solid #7db8e8;
+}
+
+.promo-card-tertiary {
+    border-top: 2px solid #a8e6cf;
+}
+
+/* Benefits Section */
+.promo-benefits {
+    margin: 80px 0;
+    padding: 60px 40px;
+    background: var(--bg-card);
+    border-radius: 8px;
+}
+
+.promo-benefits h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3vw, 42px);
+    text-align: center;
+    color: var(--text-white);
+    margin-bottom: 60px;
+    font-weight: 400;
+}
+
+.benefits-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 30px;
+    transition: var(--transition);
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: var(--accent);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.benefit-item:hover .benefit-icon {
+    background: var(--accent);
+    color: var(--bg-dark);
+    box-shadow: 0 10px 30px rgba(201, 169, 98, 0.2);
+}
+
+.benefit-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--text-white);
+    margin-bottom: 12px;
+    font-weight: 400;
+}
+
+.benefit-item p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+/* CTA Section */
+.promo-cta {
+    text-align: center;
+    padding: 80px 40px;
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(201, 169, 98, 0.1) 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.promo-cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3vw, 42px);
+    color: var(--text-white);
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.promo-cta p {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 40px;
+    background: var(--accent);
+    color: var(--bg-dark);
+    border: 2px solid var(--accent);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: var(--transition);
+    border-radius: 4px;
+}
+
+.cta-button:hover {
+    background: transparent;
+    color: var(--accent);
+    box-shadow: 0 15px 40px rgba(201, 169, 98, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .promo-cards-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .promo {
+        padding: 80px 20px;
+    }
+
+    .promo-header {
+        margin-bottom: 60px;
+    }
+
+    .promo-cards-wrapper {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-bottom: 60px;
+    }
+
+    .promo-benefits {
+        padding: 40px 20px;
+        margin: 60px 0;
+    }
+
+    .promo-benefits h2 {
+        margin-bottom: 40px;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .promo-cta {
+        padding: 50px 20px;
+    }
+
+    .promo-badge {
+        right: -30px;
+        padding: 8px 40px;
+    }
+
+    .promo-card {
+        padding: 35px 25px;
+    }
+
+    .promo-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 26px;
+    }
+
+    .promo-card h3 {
+        font-size: 20px;
+    }
+
+    .discount-price {
+        font-size: 20px;
+    }
+
+    .discount-badge {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .promo-price {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .promo {
+        padding: 60px 15px;
+    }
+
+    .promo-header h1 {
+        font-size: 28px;
+    }
+
+    .promo-card {
+        padding: 25px 15px;
+    }
+
+    .promo-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .cta-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .benefit-item {
+        padding: 20px;
+    }
+
+    .promo-cta {
+        padding: 35px 15px;
+    }
+
+    .promo-cta h2 {
+        font-size: 24px;
+    }
+
+    .promo-cta p {
+        font-size: 14px;
+    }
+}

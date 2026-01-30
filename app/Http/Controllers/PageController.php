@@ -67,6 +67,11 @@ class PageController extends Controller
         return view('kontak', compact('services'));
     }
 
+    public function promo()
+    {
+        return view('promo');
+    }
+
     public function kontakStore(Request $request)
     {
         $request->validate([
